@@ -1,0 +1,46 @@
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cardInfo {
+    max-width: 500px;
+    background: linear-gradient(rgb(229, 229, 128) 30px, rgb(252, 252, 255)) 70px;
+    padding: 2rem;
+    border: 2px solid gray;
+    margin: 5rem auto;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.icons li:hover {
+    color: blue;
+}
+
+.flexiableImg {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    border-radius: 50%;
+    border: 6px solid gray;
+}
+
+button {
+    margin: 2rem auto;
+}
+
+.userInfo {
+    visibility: hidden;
+}
+.userIcon:hover + #userInfo {
+ visibility: visible;
+}
