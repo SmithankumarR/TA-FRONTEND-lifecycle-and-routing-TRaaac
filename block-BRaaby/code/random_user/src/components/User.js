@@ -12,6 +12,8 @@ export default class User extends React.Component {
     super(props);
     this.state = {
       data: null,
+      value: "",
+      key: "name",
     };
   }
 
@@ -22,6 +24,33 @@ export default class User extends React.Component {
   }
   handleClick = () => {
     return this.componentDidMount();
+  };
+  handleMouseOver = ( { currentTarget }) => {
+    let userInfo = this.state.data.results;
+    console.log(userInfo);
+    let { id } = currentTarget;
+    switch (id) {
+      case "name":
+        return this.setState({ value: userInfo.login.username, key: id });
+      case "email":
+        return this.setState({ value: userInfo.email, key: id });
+      case "age":
+        return this.setState({ value: userInfo.dob.age, key: id });
+      case "location":
+        return this.setState({
+          value:
+            userInfo.location.street.number +
+            " " +
+            userInfo.location.street.name,
+          key: id,
+        });
+      case "phone":
+        return this.setState({ value: userInfo.phone, key: id });
+      case "password":
+        return this.setState({ value: userInfo.login.password, key: id });
+      default:
+        break;
+    }
   };
   render() {
     if (!this.state.data) {
@@ -40,10 +69,17 @@ export default class User extends React.Component {
               <div key={cardInfo.id}>
                 <img
                   className="flexiableImg"
-                  src={cardInfo.picture.medium}
+                  src={cardInfo.picture.large}
                   alt={cardInfo.name.title}
                 />
-                <div className="userInfo"></div>
+                <div>
+                  <p>my {this.state.key} is</p>
+                </div>
+                <div>
+                  <h1 className="text-4xl m-2">
+                    {this.state.value || "Searching User..."}
+                  </h1>
+                </div>
                 <h1 className="text-2xl text-center my-3">
                   {cardInfo.name.title +
                     " " +
@@ -52,23 +88,47 @@ export default class User extends React.Component {
                     cardInfo.name.last}
                 </h1>
                 <ul className="icons text-2xl">
-                  <li className="userIcon">
-                    <FaUserAlt />
+                  <li
+                    className="hover:text-sky-500"
+                    id="name"
+                    onMouseOver={this.handleMouseOver}
+                  >
+                  <FaUserAlt />
                   </li>
-                  <li className="userIcon">
+                  <li
+                    className="hover:text-sky-500"
+                    id="email"
+                    onMouseOver={this.handleMouseOver}
+                  >
                     <HiMailOpen />
                   </li>
-                  <li className="userIcon">
+                  <li
+                    className="hover:text-sky-500"
+                    id="age"
+                    onMouseOver={this.handleMouseOver}
+                  >
                     <SlCalender />{" "}
                   </li>
-                  <li className="userIcon">
+                  <li
+                    className="hover:text-sky-500"
+                    id="location"
+                    onMouseOver={this.handleMouseOver}
+                  >
                     <FaRegMap />
                   </li>
-                  <li className="userIcon">
+                  <li
+                    className="hover:text-sky-500"
+                    id="phone"
+                    onMouseOver={this.handleMouseOver}
+                  >
                     {" "}
                     <AiTwotonePhone />{" "}
                   </li>
-                  <li className="userIcon">
+                  <li
+                    className="hover:text-sky-500"
+                    id="password"
+                    onMouseOver={this.handleMouseOver}
+                  >
                     <BsFillLockFill />
                   </li>
                 </ul>
